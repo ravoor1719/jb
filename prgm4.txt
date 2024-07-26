@@ -1,0 +1,23 @@
+public class prgm4{
+public static void main (String[] args){
+   
+     String s1=new String();
+     System.out.println(“default constructor:”+s1);
+     String s2=new String("Hello world");
+     System.out.println("Parameterizes constructor:"+s2);
+     
+     char c1[]={'a','b','c','d'};
+     String s3=new String(c1);
+     System.out.println("using char array:"+s3);
+     char c2[]={'c','m','r','i','s','e'};
+     String s4=new String(c2,1,4);
+     System.out.println("using char array with index:"+s4);
+     
+     byte b1[]={65,66,67,68};
+     String s5=new String(b1);
+     System.out.println("using byte array:"+s5);
+     byte b2[]={97,98,99,100,101,102};
+     String s6=new String(b2,2,4);
+     System.out.println("using byte array:"+s6);
+}
+}
