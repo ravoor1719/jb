@@ -1,0 +1,100 @@
+Html file:
+
+<!DOCTYPE html>
+
+<head>
+
+<title>Cookie Example</title>
+
+</head>
+
+<body>
+
+<h1>Cookie Example</h1>
+
+<h2>Create Cookie</h2>
+
+<form action="sugserv1" method="post">
+
+<input type="submit" value="Create EMPID Cookie">
+
+</form>
+
+<h2>Read Cookie</h2>
+
+<form action="sugserv2" method="get">
+
+<input type="submit" value="Read EMPID Cookie">
+
+</form>
+
+</body>
+
+</html>
+
+
+sugserv1.java:
+import java.io.IOException;
+
+import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;
+@WebServlet("/sugserv1")//when req is made to sugserv1,this servlet will handle it
+
+public class sugserv1 extends HttpServlet {
+private static final long serialVersionUID = 1L;
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+ 
+
+// Create a cookie with name "EMPID" and value "AN2356" Cookie cookie = new Cookie("EMPID", "AN2356");
+// Set the maximum age of the cookie to one day (in seconds) cookie.setMaxAge(24 * 60 * 60);
+// Add the cookie to the response, sends cookie to browser to store it response.addCookie(cookie);
+// Set the response content type response.setContentType("text/html");
+// Send response to the client
+
+response.getWriter().println("Cookie created with name EMPID and value AN2356");
+
+}
+}
+
+sugserv2.java:
+import java.io.IOException;
+
+import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @WebServlet("/sugserv2")
+public class sugserv2 extends HttpServlet { private static final long serialVersionUID = 1L;
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+// Get all cookies from the request Cookie[] cookies = request.getCookies();
+// Initialize a variable to store the EMPID value String empidValue = null;
+// Check if cookies are not null if (cookies != null) {
+ 
+
+for (Cookie cookie : cookies) {
+
+// Find the cookie with the name "EMPID" if (cookie.getName().equals("EMPID")) {
+empidValue = cookie.getValue(); break;
+}
+
+}
+
+}
+
+
+// Set the response content type response.setContentType("text/html");
+// Send response to the client if (empidValue != null) {
+response.getWriter().println("Cookie EMPID found with value: " + empidValue);
+
+} else {
+
+response.getWriter().println("Cookie EMPID not found.");
+
+}
+
+}
+
+}
+ 

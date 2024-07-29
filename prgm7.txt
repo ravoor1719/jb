@@ -1,0 +1,33 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ButtonEventDemo extends JFrame implements ActionListener {
+private JButton alphaButton;
+private JButton betaButton;
+
+public ButtonEventDemo() { setTitle("Button Event Demo"); setSize(300, 150);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+// Create buttons
+alphaButton = new JButton("Alpha"); betaButton = new JButton("Beta");
+
+// Add action listener to buttons alphaButton.addActionListener(this); betaButton.addActionListener(this);
+
+// Add buttons to the content pane Container contentPane = getContentPane(); contentPane.setLayout(new FlowLayout()); contentPane.add(alphaButton); contentPane.add(betaButton);
+}
+
+@Override
+public void actionPerformed(ActionEvent e) {
+if (e.getSource() == alphaButton) { JOptionPane.showMessageDialog(this, "Alpha pressed");
+} else if (e.getSource() == betaButton) { JOptionPane.showMessageDialog(this, "Beta pressed");
+}
+}
+
+public static void main(String[] args) {
+// Create and display the JFrame SwingUtilities.invokeLater(() -> {
+ButtonEventDemo frame = new ButtonEventDemo(); frame.setVisible(true);
+});
+}
+}
